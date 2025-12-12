@@ -18,6 +18,10 @@ let nextPitchTimer = 0;
 let hitNode;
 let homeRunNode;
 let outNode;
+let homePlateX = 0;
+let homePlateY = 0;
+const homePlateWidth = 70;
+const homePlateHeight = 40;
 
 function setup() {
   const canvas = createCanvas(720, 420);
@@ -58,6 +62,22 @@ function drawField() {
   rect(width * 0.25, height * 0.7, width * 0.5, height * 0.03);
   fill(255, 255, 255, 12);
   rect(width * 0.35, height * 0.65, width * 0.3, height * 0.05);
+  homePlateX = width * 0.5;
+  homePlateY = height * 0.78;
+  fill(255, 255, 255, 230);
+  beginShape();
+  vertex(homePlateX - homePlateWidth / 2, homePlateY - homePlateHeight / 2);
+  vertex(homePlateX + homePlateWidth / 2, homePlateY - homePlateHeight / 2);
+  vertex(homePlateX + homePlateWidth / 4, homePlateY + homePlateHeight / 2);
+  vertex(homePlateX - homePlateWidth / 4, homePlateY + homePlateHeight / 2);
+  endShape(CLOSE);
+  fill(255, 255, 255, 120);
+  beginShape();
+  vertex(homePlateX - homePlateWidth / 4, homePlateY - homePlateHeight / 2);
+  vertex(homePlateX + homePlateWidth / 4, homePlateY - homePlateHeight / 2);
+  vertex(homePlateX + homePlateWidth / 5, homePlateY + homePlateHeight / 4);
+  vertex(homePlateX - homePlateWidth / 5, homePlateY + homePlateHeight / 4);
+  endShape(CLOSE);
 }
 
 function drawPitcher() {
@@ -87,9 +107,15 @@ function drawPitcher() {
 
 function drawBat() {
   push();
+  if (!homePlateX) {
+    pop();
+    return;
+  }
   stroke(255, 190, 120);
-  strokeWeight(12);
-  line(width * 0.55, height * 0.76, width * 0.6, height * 0.62);
+  strokeWeight(11);
+  const swingStartX = homePlateX + 24;
+  const swingStartY = homePlateY - 12;
+  line(swingStartX, swingStartY, swingStartX + 70, swingStartY - 120);
   pop();
 }
 
@@ -116,10 +142,11 @@ function drawBatter() {
 
 function launchPitch() {
   ball = {
-    x: width * 0.5 + random(-80, 80),
+    x: width * 0.5 + random(-25, 25),
     y: -40,
     radius: 18,
     speed: random(6.5, 9),
+    vx: random(-0.25, 0.25),
     thrown: true,
     flying: false,
     hit: false,
@@ -132,9 +159,10 @@ function handleBall() {
     animateFlight();
   } else if (ball.thrown) {
     ball.y += ball.speed;
+    ball.x += ball.vx;
     drawBall(ball.x, ball.y, ball.radius, color(255, 204, 102));
     if (swing.active) drawSwingAura();
-    if (ball.y > height + ball.radius) {
+    if (ball.y > homePlateY + homePlateHeight + 15) {
       registerOut(`${batterName}が空振りしちゃった…`);
     }
   } else {
@@ -161,10 +189,21 @@ function drawBall(x, y, radius, col) {
 
 function drawSwingAura() {
   push();
-  stroke(255, 255, 255, 140);
-  strokeWeight(2);
+  if (!homePlateX) {
+    pop();
+    return;
+  }
+  stroke(255, 255, 255, 180);
+  strokeWeight(3);
   noFill();
-  arc(width * 0.25, height * 0.75, 120, 60, -PI / 6, PI / 2);
+  arc(
+    homePlateX + 10,
+    homePlateY - 20,
+    220,
+    180,
+    -PI / 2.8,
+    -PI / 4
+  );
   pop();
 }
 
@@ -221,8 +260,8 @@ function keyReleased() {
 
 function checkHit() {
   swing.timer++;
-  const zoneX = width * swingZoneX;
-  const zoneY = height * swingZoneY;
+  const zoneX = homePlateX || width * swingZoneX;
+  const zoneY = (homePlateY || height * swingZoneY) - 8;
   const distanceX = abs(ball.x - zoneX);
   const distanceY = abs(ball.y - zoneY);
   if (distanceX < swingToleranceX && distanceY < swingToleranceY) {
