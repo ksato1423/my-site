@@ -20,8 +20,8 @@ let homeRunNode;
 let outNode;
 let homePlateX = 0;
 let homePlateY = 0;
-const homePlateWidth = 70;
-const homePlateHeight = 40;
+const homePlateWidth = 45;
+const homePlateHeight = 28;
 
 function setup() {
   const canvas = createCanvas(720, 420);
@@ -62,7 +62,7 @@ function drawField() {
   rect(width * 0.25, height * 0.7, width * 0.5, height * 0.03);
   fill(255, 255, 255, 12);
   rect(width * 0.35, height * 0.65, width * 0.3, height * 0.05);
-  homePlateX = width * 0.5;
+  homePlateX = width * 0.55;
   homePlateY = height * 0.78;
   fill(255, 255, 255, 230);
   beginShape();
@@ -113,14 +113,14 @@ function drawBat() {
   }
   stroke(255, 190, 120);
   strokeWeight(11);
-  const swingStartX = homePlateX + 24;
-  const swingStartY = homePlateY - 12;
-  line(swingStartX, swingStartY, swingStartX + 70, swingStartY - 120);
+  const swingStartX = homePlateX - 26;
+  const swingStartY = homePlateY - 8;
+  line(swingStartX, swingStartY, swingStartX + 86, swingStartY - 110);
   pop();
 }
 
 function drawBatter() {
-  const centerX = width * 0.5;
+  const centerX = width * 0.32;
   const centerY = height * 0.82;
   fill(255, 235, 210);
   ellipse(centerX, centerY - 10, 70, 70);
