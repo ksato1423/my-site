@@ -82,15 +82,15 @@ function drawField() {
 
 function drawPitcher() {
   const centerX = width * 0.5;
-  const top = height * 0.15;
+  const top = height * 0.08;
   fill(57, 36, 96);
-  circle(centerX, top + 10, 60);
+  circle(centerX, top + 8, 54);
   fill(255);
-  ellipse(centerX - 18, top - 5, 18, 22);
-  ellipse(centerX + 18, top - 5, 18, 22);
+  ellipse(centerX - 16, top - 6, 16, 20);
+  ellipse(centerX + 16, top - 6, 16, 20);
   fill(255);
-  ellipse(centerX - 10, top + 5, 16, 20);
-  ellipse(centerX + 10, top + 5, 16, 20);
+  ellipse(centerX - 8, top + 6, 12, 16);
+  ellipse(centerX + 8, top + 6, 12, 16);
   fill(24, 20, 32);
   ellipse(centerX - 12, top + 8, 6, 4);
   ellipse(centerX + 12, top + 8, 6, 4);
@@ -98,11 +98,11 @@ function drawPitcher() {
   arc(centerX, top + 20, 26, 12, 0, PI);
   noStroke();
   fill(90, 70, 110);
-  rect(centerX - 30, top + 30, 60, 40, 16, 16, 8, 8);
+  rect(centerX - 25, top + 26, 50, 36, 14, 14, 8, 8);
   fill(255, 255, 255, 60);
   textSize(12);
   textAlign(CENTER, CENTER);
-  text(pitcherName, centerX, top + 52);
+  text(pitcherName, centerX, top + 46);
 }
 
 function drawBat() {
@@ -113,9 +113,14 @@ function drawBat() {
   }
   stroke(255, 190, 120);
   strokeWeight(11);
-  const swingStartX = homePlateX - 26;
-  const swingStartY = homePlateY - 8;
-  line(swingStartX, swingStartY, swingStartX + 86, swingStartY - 110);
+  const swingStartX = homePlateX - 30;
+  const swingStartY = homePlateY - 12;
+  const swingEndX = swingStartX + 90;
+  const swingEndY = swingStartY - 110;
+  line(swingStartX, swingStartY, swingEndX, swingEndY);
+  fill(255, 200, 120);
+  strokeWeight(2);
+  circle(swingStartX, swingStartY, 12);
   pop();
 }
 
@@ -129,6 +134,9 @@ function drawBatter() {
   fill(255, 235, 210);
   ellipse(centerX - 20, centerY - 40, 18, 18);
   ellipse(centerX + 20, centerY - 40, 18, 18);
+  fill(100, 60, 28);
+  ellipse(centerX - 24, centerY + 22, 12, 18);
+  ellipse(centerX + 24, centerY + 22, 12, 18);
   fill(30, 20, 12);
   ellipse(centerX - 8, centerY - 13, 10, 6);
   ellipse(centerX + 8, centerY - 13, 10, 6);
@@ -143,7 +151,7 @@ function drawBatter() {
 function launchPitch() {
   ball = {
     x: width * 0.5 + random(-25, 25),
-    y: -40,
+    y: -120,
     radius: 18,
     speed: random(6.5, 9),
     vx: random(-0.25, 0.25),
