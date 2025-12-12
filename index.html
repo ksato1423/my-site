@@ -3,43 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My GitHub Pages Site</title>
-  <style>
-    body {
-      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      color: #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    main {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 6px 16px rgba(0,0,0,.1);
-      max-width: 640px;
-      text-align: center;
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 2rem;
-    }
-    p {
-      line-height: 1.6;
-    }
-  </style>
+  <title>サトウの自己紹介</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <h1>Welcome to My Site</h1>
-    <p>
-      This is a simple GitHub Pages site generated with a minimal HTML template.
-      Feel free to add content or customize the styling.
-    </p>
-  </main>
+  <div class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">はじめまして</p>
+      <h1>サトウ</h1>
+      <p class="lede">会社員として日々学びながら、週末は車で知らない道を走ってリフレッシュしています。</p>
+      <div class="hero-meta">
+        <span>職業: 会社員</span>
+        <span>学歴: 慶応義塾大学 卒業</span>
+      </div>
+    </header>
+
+    <section class="card-grid">
+      <article class="card">
+        <h2>自分について</h2>
+        <p>チームワークと丁寧なコミュニケーションを大切にする会社員です。柔軟な対応を心がけ、与えられた役割に責任を持って取り組んでいます。</p>
+      </article>
+      <article class="card">
+        <h2>趣味</h2>
+        <p>趣味はドライブ。週末には海岸線や山道をのんびり巡り、地元のカフェや景勝地で休憩するのが好きです。車中で流す音楽や景色の移り変わりも楽しみのひとつです。</p>
+      </article>
+      <article class="card">
+        <h2>経験</h2>
+        <p>慶応義塾大学で学んだ基礎を基盤に、現在の職場では日常業務に加えプロジェクトや業務改善にも参画しています。学び続ける姿勢で、よりよい成果をチームと共有することを目指しています。</p>
+      </article>
+    </section>
+
+    <section class="detail-panel">
+      <h2>今後の目標</h2>
+      <p>多様な視点を取り入れながら業務の質を高め、周囲に良い影響を与えられる存在になりたいと考えています。ドライブで新しい風景を見つけるように、仕事でも新しい挑戦を続けていく予定です。</p>
+      <p>このページは随時更新予定なので、必要に応じて内容を見直していきます。</p>
+    </section>
+
+    <footer class="page-foot">
+      <p>連絡先は現在掲載しておりません。ご要望があれば別途ご案内いたします。</p>
+    </footer>
+  </div>
 </body>
 </html>
