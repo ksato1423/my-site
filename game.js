@@ -12,7 +12,7 @@ const swingDuration = 12;
 
 let ball = {};
 let swing = { active: false, timer: 0 };
-let message = "スペースキーでスイング！";
+let message = "スペースキーでプーさんのバットを振ろう！";
 let nextPitchTimer = 0;
 let hitNode;
 let homeRunNode;
@@ -88,7 +88,7 @@ function launchPitch() {
     flying: false,
     hit: false,
   };
-  message = "ピッチャー、ボールを投げたよ";
+  message = "ピッチャーからハチミツボールが来たよ！";
 }
 
 function handleBall() {
@@ -99,7 +99,7 @@ function handleBall() {
     drawBall(ball.x, ball.y, ball.radius, color(255, 218, 93));
     if (swing.active) drawSwingAura();
     if (ball.x < -ball.radius) {
-      registerOut("打ちそこねたよ");
+      registerOut("空振りしちゃった…");
     }
   } else {
     if (nextPitchTimer <= 0) {
@@ -172,7 +172,7 @@ function keyPressed() {
     if (ball.thrown && !ball.flying) {
       checkHit();
     } else if (!ball.thrown) {
-      message = "次のピッチを待ってね";
+      message = "次のピッチを待ちながら、プーさんも深呼吸";
     }
   }
 }
@@ -192,7 +192,7 @@ function checkHit() {
   if (distanceX < swingToleranceX && distanceY < swingToleranceY) {
     registerHit();
   } else {
-    message = "タイミングが合わなかった...";
+    message = "惜しかった！リズムを合わせてみよう";
   }
 }
 
@@ -210,7 +210,7 @@ function registerHit() {
   ball.flightDuration = 65;
   ball.flightTimer = 0;
   ball.isHomeRun = isHomeRun;
-  message = isHomeRun ? "ホームラン！！" : "ナイスヒット！";
+  message = isHomeRun ? "ホームラン！！ハチミツのシャワーだ！" : "ナイスヒット！プーさんも喜んでるよ";
 }
 
 function registerOut(reason) {
